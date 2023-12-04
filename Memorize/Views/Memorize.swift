@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Memorize: View {
     @State var emojis: [String] = ["👻", "🎃", "🕷️", "👹", "💀", "🧙‍♀️", "🍭", "🙀", "☠️", "🕸️"]
+    @State var cardColor = Color(.orange)
 
     //MARK: - MAIN INTERFACE
     var body: some View {
@@ -34,21 +35,23 @@ struct Memorize: View {
                     .aspectRatio(2/3, contentMode: .fit)
             }
         }
-        .foregroundColor(Color.orange)
+        .foregroundColor(cardColor)
     }
 
     var changeThemeButton: some View {
-        // Creates a text button
+        // Set contents of emojis array and card color based on button pressed.
         Menu("Change Theme") {
-            // Set contents of emojis array based on button pressed.
             Button("Halloween", systemImage: "cat.fill") {
                 emojis = ["👻", "👻", "🎃", "🎃", "🕷️", "🕷️", "👹", "👹", "💀", "🧙‍♀️", "🧙‍♀️", "🍭", "🙀", "☠️", "🕸️"].shuffled()
+                cardColor = Color.orange
             }
             Button("Sports", systemImage: "figure.american.football") {
                 emojis = ["⚽", "⚽", "🏀", "🏀", "🏈", "🏈", "⚾", "⚾", "🎾", "🎾", "🤽‍♀️", "🤽‍♀️", "🥌", "⛸️", "🛷", "🛼", "🛹"].shuffled()
+                cardColor = Color.blue
             }
             Button("Professions", systemImage: "person.fill") {
                 emojis = ["💼", "💼", "⛑️", "⛑️", "👨‍🏫", "👨‍🏫", "👮‍♀️", "👮‍♀️", "👩‍🌾", "👩‍🌾", "👨‍🎨", "👨‍🔬", "🧑‍⚕️", "👨‍💼", "💂‍♀️", "🧑‍🚀"].shuffled()
+                cardColor = Color.green
             }
         }
     }
