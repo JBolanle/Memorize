@@ -8,24 +8,29 @@
 import SwiftUI
 
 struct MemorizeGame: View {
-    @State var cardCount: Int = 4
+    @State var emojis: [String] = ["👻", "🎃", "🕷️", "👹", "💀", "🧙‍♀️", "🍭", "🙀", "☠️", "🕸️"]
 
-    let emojis: [String] = ["👻", "🎃", "🕷️", "👹", "💀", "🧙‍♀️", "🍭", "🙀", "☠️", "🕸️"]
-
+    //MARK: - MAIN INTERFACE
     var body: some View {
+        Text("Memorize!")
+            .font(.largeTitle)
+            .fontWeight(.semibold)
         VStack {
             ScrollView {
                 cards
             }
             Spacer()
-            cardCountAdjusters
+            changeThemeButton
         }
         .padding()
     }
 
+    //MARK: - VIEW COMPONENTS
+
     var cards: some View {
+        // Displays CardView and sets that content to what emoji is at the emoji array index
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
-            ForEach(0..<cardCount, id: \.self) { index in
+            ForEach(0..<emojis.count, id: \.self) { index in
                 CardView(content: emojis[index])
                     .aspectRatio(2/3, contentMode: .fit)
             }
@@ -33,37 +38,26 @@ struct MemorizeGame: View {
         .foregroundColor(Color.orange)
     }
 
-    func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
-        Button {
-            cardCount += offset
-        } label: {
-            Image(systemName: symbol)
+    var changeThemeButton: some View {
+        Menu("Change Theme") {
+            // Set contents of emojis array based on button pressed.
+            Button("👻 Halloween") {
+                emojis = ["👻", "👻", "🎃", "🎃", "🕷️", "🕷️", "👹", "👹", "💀", "🧙‍♀️", "🧙‍♀️", "🍭", "🙀", "☠️", "🕸️"].shuffled()
+            }
+            Button("⚽ Sports") {
+                emojis = ["⚽", "⚽", "🏀", "🏀", "🏈", "🏈", "⚾", "⚾", "🎾", "🎾", "🤽‍♀️", "🤽‍♀️", "🥌", "⛸️", "🛷", "🛼", "🛹"].shuffled()
+            }
+            Button("🧑‍🚀 Professions") {
+                emojis = ["💼", "💼", "⛑️", "⛑️", "👨‍🏫", "👨‍🏫", "👮‍♀️", "👮‍♀️", "👩‍🌾", "👩‍🌾", "👨‍🎨", "👨‍🔬", "🧑‍⚕️", "👨‍💼", "💂‍♀️", "🧑‍🚀"].shuffled()
+            }
         }
-        .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
-    }
-
-    var cardRemover: some View {
-        cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus.fill")
-    }
-
-    var cardAdder: some View {
-        cardCountAdjuster(by: +1, symbol: "rectangle.stack.badge.plus.fill")
-    }
-
-    var cardCountAdjusters: some View {
-        HStack {
-            cardRemover
-            Spacer()
-            cardAdder
-        }
-        .imageScale(.large)
-        .font(.largeTitle)
     }
 }
 
+//MARK: - VIEWS
 struct CardView: View {
     let content: String
-    @State var isFaceUp: Bool = true
+    @State var isFaceUp: Bool = false
 
     var body: some View {
         ZStack {
