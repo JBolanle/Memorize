@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MemorizeGame: View {
+struct Memorize: View {
     @State var emojis: [String] = ["👻", "🎃", "🕷️", "👹", "💀", "🧙‍♀️", "🍭", "🙀", "☠️", "🕸️"]
 
     //MARK: - MAIN INTERFACE
@@ -15,14 +15,13 @@ struct MemorizeGame: View {
         Text("Memorize!")
             .font(.largeTitle)
             .fontWeight(.semibold)
-        VStack {
-            ScrollView {
-                cards
-            }
-            Spacer()
-            changeThemeButton
+        ScrollView {
+            cards
         }
         .padding()
+        Spacer()
+        changeThemeButton
+            .padding()
     }
 
     //MARK: - VIEW COMPONENTS
@@ -30,7 +29,7 @@ struct MemorizeGame: View {
     var cards: some View {
         // Displays CardView and sets that content to what emoji is at the emoji array index
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
-            ForEach(0..<emojis.count, id: \.self) { index in
+            ForEach(emojis.indices, id: \.self) { index in
                 CardView(content: emojis[index])
                     .aspectRatio(2/3, contentMode: .fit)
             }
@@ -81,5 +80,5 @@ struct CardView: View {
 
 
 #Preview {
-    MemorizeGame()
+    Memorize()
 }
