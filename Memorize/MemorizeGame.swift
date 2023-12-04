@@ -39,15 +39,16 @@ struct MemorizeGame: View {
     }
 
     var changeThemeButton: some View {
+        // Creates a text button
         Menu("Change Theme") {
             // Set contents of emojis array based on button pressed.
-            Button("👻 Halloween") {
+            Button("Halloween", systemImage: "cat.fill") {
                 emojis = ["👻", "👻", "🎃", "🎃", "🕷️", "🕷️", "👹", "👹", "💀", "🧙‍♀️", "🧙‍♀️", "🍭", "🙀", "☠️", "🕸️"].shuffled()
             }
-            Button("⚽ Sports") {
+            Button("Sports", systemImage: "figure.american.football") {
                 emojis = ["⚽", "⚽", "🏀", "🏀", "🏈", "🏈", "⚾", "⚾", "🎾", "🎾", "🤽‍♀️", "🤽‍♀️", "🥌", "⛸️", "🛷", "🛼", "🛹"].shuffled()
             }
-            Button("🧑‍🚀 Professions") {
+            Button("Professions", systemImage: "person.fill") {
                 emojis = ["💼", "💼", "⛑️", "⛑️", "👨‍🏫", "👨‍🏫", "👮‍♀️", "👮‍♀️", "👩‍🌾", "👩‍🌾", "👨‍🎨", "👨‍🔬", "🧑‍⚕️", "👨‍💼", "💂‍♀️", "🧑‍🚀"].shuffled()
             }
         }
