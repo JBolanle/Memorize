@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct Memorize: View {
+struct EmojiMemoryGameView: View {
+    var viewModel: EmojiMemoryGame
+
     @State var emojis: [String] = ["👻", "🎃", "🕷️", "👹", "💀", "🧙‍♀️", "🍭", "🙀", "☠️", "🕸️"]
     @State var cardColor = Color(.orange)
 
@@ -82,6 +84,6 @@ struct CardView: View {
 
 
 
-#Preview {
-    Memorize()
-}
+//#Preview {
+//    Memorize()
+//}
